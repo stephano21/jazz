@@ -29,12 +29,22 @@ function App() {
 
         <h1>¿Quieres ser mi novia?</h1>
         <div>
-          <button onClick={handleYesClick}>Sí</button>
-          <button id="no-button" onClick={handleNoClick} onMouseEnter={handleNoHover}>
-            No
-          </button>
+          <div className="group">
+            <div className="btn">
+              <button onClick={handleYesClick}>Sí</button>
+            </div>
+            <div className="btn">
+              <button id="no-button" onClick={handleNoClick} onMouseEnter={handleNoHover}>
+                No
+              </button>
+            </div>
+          </div>
         </div>
-        {answer && <p>Sabía que dirías que si! Te Amo ❤️</p>}
+        {answer && 
+        <div className='response'>
+          <p>Sabía que dirías que si! Te Amo ❤️</p>
+        </div>
+        }
       </div>
     </div>
   );

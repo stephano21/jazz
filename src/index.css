@@ -14,15 +14,16 @@ h1 {
 }
 
 button {
-  width: 60px;
+  width: 70px;
   border: none;
-  height: 30px;
+  height: 40px;
   border-radius: 10px;
   font-weight: bold;
-  background: #334d50;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #cbcaa5, #334d50);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #cbcaa5, #334d50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: white
 
+}
+p{
+  font-size: 40px;
 }
 .card{
   height: 200px; /* 100% del viewport height */
@@ -30,4 +31,15 @@ button {
   border-radius: 30px;
   backdrop-filter: blur(30px) brightness(80%); /* Aplica un filtro de desenfoque y ajusta el brillo */
   border: 1px solid rgba(71, 66, 66, 0.5);
+}
+.group{
+  display: flex;
+ justify-content: center;
+}
+.btn{
+  margin: 10px;
+}
+.response{
+  
+  background-color: rgba(3, 3, 3, 0.63);
 }
