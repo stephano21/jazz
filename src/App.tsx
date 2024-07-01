@@ -1,53 +1,57 @@
-import React, { useState } from 'react';
+import React, { Fragment, useEffect, useState } from "react";
+import {
+    BrowserRouter as Router,
+    Route,
+    Routes,
+    Navigate,
+} from "react-router-dom";
+import { useAuth } from "./context/AuthContext";
+import { Novia } from "./views/Novia";
 import "./index.css";
-function App() {
-  const [answer, setAnswer] = useState<string>("");
+import 'rsuite/dist/rsuite.min.css';
 
-  const handleYesClick = () => {
-    setAnswer('yes');
-  };
+import { NotFoundPage } from "./views/NotFoundPage";
+import { Home } from "./views/Home";
 
-  const handleNoClick = () => {
-    setAnswer('no');
-  };
+export const App: React.FC = () => {
+    const { isAuthenticated, UserData } = useAuth();
+    const [isReady, setIsReady] = useState(false);
 
-  const handleNoHover = () => {
-    // Cambia la posición del botón 'No' al azar
-    const newX = Math.random() * window.innerWidth;
-    const newY = Math.random() * window.innerHeight;
-    const noButton = document.getElementById('no-button');
-    if (noButton) {
-      noButton.style.position = 'absolute';
-      noButton.style.left = `${newX}px`;
-      noButton.style.top = `${newY}px`;
+    useEffect(() => {
+        setIsReady(true);
+    }, [isAuthenticated]);
+
+    if (!isReady) {
+        return null;
     }
-  };
+    console.log(isAuthenticated)
+    return (
+        <>
+            <Router>
+                <Routes>
+                    {isAuthenticated ? (
+                        <>
+                            <Route path="/" element={<Navigate to="/home" />} />
+                            <Route path="/nv" element={<Novia />} />
+                            
+                            <Route path="*" element={<NotFoundPage />} />
+                            {UserData && UserData.Role !== null && (
+                                <Fragment>
+                                    <Route path="/crop/readings" element={<Novia />} />
+                                </Fragment>
+                            )}
 
-  return (
-    <div className="App">
-      <div className="card">
-
-        <h1>¿Quieres ser mi novia?</h1>
-        <div>
-          <div className="group">
-            <div className="btn">
-              <button onClick={handleYesClick}>Sí</button>
-            </div>
-            <div className="btn">
-              <button id="no-button" onClick={handleNoClick} onMouseEnter={handleNoHover}>
-                No
-              </button>
-            </div>
-          </div>
-        </div>
-        {answer && 
-        <div className='response'>
-          <p>Sabía que dirías que si! Te Amo ❤️</p>
-        </div>
-        }
-      </div>
-    </div>
-  );
-}
-
-export default App;
+                        </>
+                    ) : (
+                        <>
+                            <Route path="/" element={<Navigate to="/home" />} />
+                            <Route path="/auth/login" element={<Novia />} />
+                            <Route path="/home" element={<Home />} />
+                        </>
+                    )}
+                    <Route path="*" element={<NotFoundPage />} />
+                </Routes>
+            </Router>
+        </>
+    );
+};
