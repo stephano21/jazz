@@ -12,6 +12,7 @@ import 'rsuite/dist/rsuite.min.css';
 
 import { NotFoundPage } from "./views/NotFoundPage";
 import { Home } from "./views/Home";
+import { EmailConfirm } from "./views/EmailConfirm";
 
 export const App: React.FC = () => {
     const { isAuthenticated, UserData } = useAuth();
@@ -50,6 +51,7 @@ export const App: React.FC = () => {
                         </>
                     )}
                     <Route path="*" element={<NotFoundPage />} />
+                    <Route path="/email/confirm" element={<EmailConfirm />} />
                 </Routes>
             </Router>
         </>

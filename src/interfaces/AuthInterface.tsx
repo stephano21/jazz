@@ -1,9 +1,5 @@
 import { IToken } from "./ApiInterfaces";
 
-export interface ILogin {
-    username: string;
-    password: string;
-}
 export interface IRegister {
     Username: string;
     password: string;

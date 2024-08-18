@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
+import { Button, ButtonToolbar, Panel, Notification, toaster } from 'rsuite';
 import "../index.css";
-export const  Novia =()=> {
+export const Novia = () => {
   const [answer, setAnswer] = useState<string>("");
-
+  const message = (
+    <Notification type="success" header={`Princesa Hermosa!`} closable>
+      <p>Sabía que dirías que si! <br /> Te Amo ❤️</p>
+      <hr />
+      <ButtonToolbar>
+        <Button appearance="primary">Ok</Button>
+        <Button appearance="default">Cancel</Button>
+      </ButtonToolbar>
+    </Notification>
+  );
   const handleYesClick = () => {
     setAnswer('yes');
+    toaster.push(message, { placement:"topCenter"})
   };
 
   const handleNoClick = () => {
@@ -12,6 +23,7 @@ export const  Novia =()=> {
   };
 
   const handleNoHover = () => {
+    console.log("On")
     // Cambia la posición del botón 'No' al azar
     const newX = Math.random() * window.innerWidth;
     const newY = Math.random() * window.innerHeight;
@@ -25,27 +37,22 @@ export const  Novia =()=> {
 
   return (
     <div className="App">
-      <div className="card">
-
-        <h1>¿Quieres ser mi novia?</h1>
+      <Panel header="¿Quieres ser mi novia?" shaded>
         <div>
           <div className="group">
             <div className="btn">
-              <button onClick={handleYesClick}>Sí</button>
+              <Button onClick={handleYesClick} color="green" appearance="primary">
+                Sí
+              </Button>
             </div>
             <div className="btn">
-              <button id="no-button" onClick={handleNoClick} onMouseEnter={handleNoHover}>
-                No
-              </button>
+              
+              <Button appearance="primary" color="red" id='no-button' onMouseEnter={handleNoHover}>No</Button>
             </div>
           </div>
         </div>
-        {answer && 
-        <div className='response'>
-          <p>Sabía que dirías que si! Te Amo ❤️</p>
-        </div>
-        }
-      </div>
+        
+      </Panel>
     </div>
   );
 }
