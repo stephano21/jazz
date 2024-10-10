@@ -1,9 +1,9 @@
 import { Panel, Placeholder } from "rsuite"
 const bodyProps = {
     style: {
-      height: 300
+        height: 300
     }
-  };
+};
 export const Home = () => {
     return (
         <>

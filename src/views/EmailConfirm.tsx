@@ -19,8 +19,8 @@ export const EmailConfirm = () => {
 
   const Validate = () => {
     getRequest<any>(Endpoints.EmailConfirm, {
-      userIdEncript: userId,
-      codeEncript: code
+      userId,
+      code
     })
       .then((e) => {
         //setData(e)
